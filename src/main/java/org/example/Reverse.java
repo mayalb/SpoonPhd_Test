@@ -6,6 +6,24 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import spoon.Launcher;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
+
+import spoon.Launcher;
+import spoon.reflect.CtModel;
+import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtIf;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.factory.Factory;
+import spoon.reflect.visitor.filter.TypeFilter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
+import spoon.Launcher;
 import spoon.reflect.code.CtCodeSnippetExpression;
 import spoon.reflect.code.CtIf;
 import spoon.reflect.declaration.CtClass;
@@ -15,29 +33,43 @@ public class Reverse {
     public Reverse() {
     }
 
-    public static CtClass reverseOperators(CtClass code) {
-        Map<String, String> OperatorMap = new HashMap<String, String>() {
-            {
-                this.put("<", ">");
-                this.put(">", "<");
-                this.put("==", "!=");
-                this.put("!=", "==");
-                this.put("<=", ">=");
-                this.put(">=", "<=");
-                this.put("&&", "||");
-                this.put("||", "&&");
+     public static void reverseOperators(CtClass<?> ctClass) {
+        // Traverse through the elements of the CtClass
+        for (CtElement element : ctClass.getElements(e -> true)) {
+            // If the element is an if statement
+            if (element instanceof CtIf) {
+                CtIf ifStatement = (CtIf) element;
+
+                // Reverse operators in the condition
+                if (ifStatement.getCondition() instanceof CtBinaryOperator) {
+                    CtBinaryOperator condition = (CtBinaryOperator) ifStatement.getCondition();
+                    condition.setKind(reverseOperator(condition.getKind()));
+                }
             }
-        };
-        Factory factory = (new Launcher()).createFactory();
-        List<CtIf> conditions = code.getElements(new TypeFilter(CtIf.class));
-        Iterator var4 = conditions.iterator();
-
-        while(var4.hasNext()) {
-            CtIf con = (CtIf)var4.next();
-            CtCodeSnippetExpression exp = factory.createCodeSnippetExpression(StringUtils.replaceEach(con.getCondition().toString(), (String[])OperatorMap.keySet().toArray(new String[0]), (String[])OperatorMap.values().toArray(new String[0])));
-            con.setCondition(exp);
         }
-
-        return code;
+    }
+    // Method to reverse operators
+    public static BinaryOperatorKind reverseOperator(BinaryOperatorKind operator) { // Change the return type
+        switch (operator) {
+            case EQ:
+                return BinaryOperatorKind.NE;
+            case NE:
+                return BinaryOperatorKind.EQ;
+            case LT:
+                return BinaryOperatorKind.GE;
+            case LE:
+                return BinaryOperatorKind.GT;
+            case GT:
+                return BinaryOperatorKind.LE;
+            case GE:
+                return BinaryOperatorKind.LT;
+            case AND:
+                return BinaryOperatorKind.OR;
+            case OR:
+                return BinaryOperatorKind.AND;
+            // Add more cases for other operators as needed
+            default:
+                return operator;
+        }
     }
 }

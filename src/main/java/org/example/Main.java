@@ -8,6 +8,8 @@ import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtIf;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.visitor.filter.NamedElementFilter;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -19,7 +21,6 @@ import spoon.reflect.visitor.filter.NamedElementFilter;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Welcome to the test");
         //create a new spoon launcher
         Launcher launcher= new Launcher();
         //add the input java file to transform
@@ -31,17 +32,21 @@ public class Main {
         //get the transformed model
         CtModel model= launcher.getModel();
 
-
-        // transform the model
-        // transform the model
+        // transform and print the model
         List<CtClass> Classes = model.filterChildren(new NamedElementFilter(CtClass.class, "Input")).list();
-        CtClass original = (CtClass)Classes.get(0);
-        System.out.println("    ==> Original Code : \n\n" + original);
-        CtClass transformed = Reverse.reverseOperators(original);
-        System.out.println("\n    ==> Transformed Code : \n\n" + transformed);
+        CtClass inputCode = (CtClass)Classes.get(0);
 
-        // print the model after the transformation
-        //printAST(model,launcher);
+
+
+        System.out.println("   ----- Input Code ---- \n\n" + inputCode);
+         Reverse.reverseOperators(inputCode);
+        System.out.println(model);
+
+
+        System.out.println(inputCode.toString());
+        //System.out.println("\n \n   -----Transformed Code----- \n\n" + transformed);
+
+
 
     }
 
