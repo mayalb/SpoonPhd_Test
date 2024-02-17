@@ -17,7 +17,11 @@ import spoon.reflect.code.CtIf;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.BinaryOperatorKind;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,47 +33,120 @@ import spoon.reflect.code.CtIf;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.filter.TypeFilter;
-public class Reverse {
-    public Reverse() {
-    }
 
-     public static void reverseOperators(CtClass<?> ctClass) {
+public class Reverse {
+    //public static void transformModel(CtModel model) {
+        //model.getElements(new TypeFilter<>(CtIf.class)).forEach(ifStatement -> {
+            //CtExpression<Boolean> condition = ((CtIf) ifStatement).getCondition();
+          //  CtExpression<Boolean> transformedCondition = reverseBinaryOperators(condition);
+        //    ((CtIf) ifStatement).setCondition(transformedCondition);
+      //  });
+    //}
+    public static void reverseOperators(CtClass<?> ctClass) {
+        // If the element is a class
+
         // Traverse through the elements of the CtClass
         for (CtElement element : ctClass.getElements(e -> true)) {
             // If the element is an if statement
             if (element instanceof CtIf) {
                 CtIf ifStatement = (CtIf) element;
 
-                // Reverse operators in the condition
-                if (ifStatement.getCondition() instanceof CtBinaryOperator) {
-                    CtBinaryOperator condition = (CtBinaryOperator) ifStatement.getCondition();
-                    condition.setKind(reverseOperator(condition.getKind()));
-                }
+                reverseBinaryOperators(ifStatement.getCondition());
+
             }
         }
     }
-    // Method to reverse operators
-    public static BinaryOperatorKind reverseOperator(BinaryOperatorKind operator) { // Change the return type
-        switch (operator) {
-            case EQ:
-                return BinaryOperatorKind.NE;
-            case NE:
-                return BinaryOperatorKind.EQ;
-            case LT:
-                return BinaryOperatorKind.GE;
-            case LE:
-                return BinaryOperatorKind.GT;
-            case GT:
-                return BinaryOperatorKind.LE;
-            case GE:
-                return BinaryOperatorKind.LT;
-            case AND:
-                return BinaryOperatorKind.OR;
-            case OR:
-                return BinaryOperatorKind.AND;
-            // Add more cases for other operators as needed
-            default:
-                return operator;
+
+    // print function
+    public static void printAST(CtModel model, Launcher launcher) {
+        DefaultJavaPrettyPrinter printer = new DefaultJavaPrettyPrinter(launcher.getEnvironment());
+        model.getAllTypes().forEach(type -> {
+            printer.scan(type);
+            System.out.println(printer.toString());
+        });
+    }
+    // Method to reverse binary operators recursively
+    // Method to reverse binary operators recursively
+    private static void reverseBinaryOperators(CtExpression<?> expression) {
+        if (expression instanceof CtBinaryOperator) {
+            CtBinaryOperator<?> binaryOperator = (CtBinaryOperator<?>) expression;
+            BinaryOperatorKind originalKind = binaryOperator.getKind();
+            switch (originalKind) {
+                case AND:
+                    binaryOperator.setKind(BinaryOperatorKind.OR);
+                    break;
+                case OR:
+                    binaryOperator.setKind(BinaryOperatorKind.AND);
+                    break;
+                // Handle comparison operators
+                case EQ:
+                case NE:
+                case LT:
+                case LE:
+                case GT:
+                case GE:
+                    // Reverse comparison operators
+                    reverseComparisonOperator(binaryOperator);
+                    break;
+                default:
+                    break;
+            }
+            // Recursively process left and right operands
+            reverseBinaryOperators(binaryOperator.getLeftHandOperand());
+            reverseBinaryOperators(binaryOperator.getRightHandOperand());
         }
     }
+    // Method to reverse comparison operators
+    private static void reverseComparisonOperator(CtBinaryOperator<?> binaryOperator) {
+        BinaryOperatorKind originalKind = binaryOperator.getKind();
+        switch (originalKind) {
+            case EQ:
+                binaryOperator.setKind(BinaryOperatorKind.NE);
+                break;
+            case NE:
+                binaryOperator.setKind(BinaryOperatorKind.EQ);
+                break;
+            case LT:
+                binaryOperator.setKind(BinaryOperatorKind.GE);
+                break;
+            case LE:
+                binaryOperator.setKind(BinaryOperatorKind.GT);
+                break;
+            case GT:
+                binaryOperator.setKind(BinaryOperatorKind.LE);
+                break;
+            case GE:
+                binaryOperator.setKind(BinaryOperatorKind.LT);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static CtExpression<Boolean> reverseOperators(CtExpression<Boolean> condition) {
+        if (condition instanceof CtBinaryOperator) {
+            CtBinaryOperator<Boolean> binaryOperator = (CtBinaryOperator<Boolean>) condition;
+            switch (binaryOperator.getKind()) {
+                case EQ:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.NE);
+                case NE:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.EQ);
+                case AND:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.OR);
+                case OR:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.AND);
+                case GT:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.LE);
+                case GE:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.LT);
+                case LT:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.GE);
+                case LE:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.GT);
+            }
+        }
+        return condition;
+    }
+
 }
+

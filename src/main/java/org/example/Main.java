@@ -1,6 +1,8 @@
 package org.example;
 import spoon.Launcher;
 import spoon.reflect.CtModel;
+import spoon.Launcher;
+import spoon.reflect.CtModel;
 import java.util.List;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -22,7 +24,7 @@ import spoon.reflect.visitor.filter.NamedElementFilter;
 public class Main {
     public static void main(String[] args) {
         //create a new spoon launcher
-        Launcher launcher= new Launcher();
+       Launcher launcher= new Launcher();
         //add the input java file to transform
         launcher.addInputResource("./src/main/java");
         //run the spoon
@@ -33,18 +35,26 @@ public class Main {
         CtModel model= launcher.getModel();
 
         // transform and print the model
-        List<CtClass> Classes = model.filterChildren(new NamedElementFilter(CtClass.class, "Input")).list();
+        List<CtClass> Classes = model.filterChildren(new NamedElementFilter(CtClass.class, "XYDataItem")).list();
         CtClass inputCode = (CtClass)Classes.get(0);
 
 
 
         System.out.println("   ----- Input Code ---- \n\n" + inputCode);
          Reverse.reverseOperators(inputCode);
-        System.out.println(model);
+       System.out.println("   ----- transformed Code ---- \n\n" );
 
 
         System.out.println(inputCode.toString());
         //System.out.println("\n \n   -----Transformed Code----- \n\n" + transformed);
+      //  String path_to_code = "./src/main/java/org/example/Input.java";
+        //Reverse reverse = new Reverse();
+        //Launcher launcher = new Launcher();
+        //launcher.addInputResource(path_to_code);
+        //launcher.buildModel();
+        //CtModel model = launcher.getModel();
+        //reverse.reverseOperators(model);
+        //reverse.printAST(model,launcher);
 
 
 

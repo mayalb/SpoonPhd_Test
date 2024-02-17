@@ -7,7 +7,7 @@ public class Input{
     public void code() {
         int x = 2;
         int y = 5;
-        if (x > 0 && y / x == 3) {
+        if ((x > 0) && (y / x == 3)) {
             System.out.println("first case");
         } else if (x != 0 && y / x > 3) {
             System.out.println("second case");
@@ -16,4 +16,10 @@ public class Input{
         }
 
     }
-}
+    public void Mycode(){
+        int x=10;
+        if (x == 50) {
+            System.out.println("code reversed");
+        }
+    }
+   }

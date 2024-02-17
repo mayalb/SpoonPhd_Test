@@ -14,4 +14,11 @@ public class Input {
             java.lang.System.out.println("first case");
         }
     }
+
+    public void Mycode() {
+        int x = 10;
+        if (x == 50) {
+            java.lang.System.out.println("code reversed");
+        }
+    }
 }
