@@ -2,11 +2,11 @@ package org.example;
 public class XYDataItem {
     private java.util.List<org.example.XYDataItem> data;
 
-    private boolean allowDuplicateXValues;
+    public boolean autoSort;
 
-    private boolean autoSort;
+    public int maximumItemCount;
 
-    private int maximumItemCount;
+    public boolean allowDuplicateXValues;
 
     public XYDataItem() {
         data = new java.util.ArrayList<>();
@@ -59,7 +59,7 @@ public class XYDataItem {
     private void setY(java.lang.Number y) {
     }
 
-    protected org.example.XYDataItem clone() throws java.lang.CloneNotSupportedException {
+    public org.example.XYDataItem clone() throws java.lang.CloneNotSupportedException {
         return ((org.example.XYDataItem) (super.clone()));
     }
 

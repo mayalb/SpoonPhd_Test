@@ -1,6 +1,4 @@
 package org.example;
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(java.lang.String[] args) {
         // create a new spoon launcher
@@ -18,14 +16,5 @@ public class Main {
         org.example.Reverse.reverseOperators(inputCode);
         java.lang.System.out.println("   ----- transformed Code ---- \n\n");
         java.lang.System.out.println(inputCode.toString());
-        // System.out.println("\n \n   -----Transformed Code----- \n\n" + transformed);
-        // String path_to_code = "./src/main/java/org/example/Input.java";
-        // Reverse reverse = new Reverse();
-        // Launcher launcher = new Launcher();
-        // launcher.addInputResource(path_to_code);
-        // launcher.buildModel();
-        // CtModel model = launcher.getModel();
-        // reverse.reverseOperators(model);
-        // reverse.printAST(model,launcher);
     }
 }

@@ -5,9 +5,10 @@ import java.util.List;
 public class XYDataItem {
 
     private List<XYDataItem> data;
-    private boolean allowDuplicateXValues;
-    private boolean autoSort;
-    private int maximumItemCount;
+
+    public boolean autoSort;
+    public int maximumItemCount;
+    public boolean allowDuplicateXValues;
 
     public XYDataItem() {
         data = new ArrayList<>();
@@ -63,7 +64,7 @@ public class XYDataItem {
 
     }
 
-    protected XYDataItem clone() throws CloneNotSupportedException {
+    public XYDataItem clone() throws CloneNotSupportedException {
         return (XYDataItem) super.clone();
     }
 

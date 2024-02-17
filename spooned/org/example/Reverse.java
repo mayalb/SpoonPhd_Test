@@ -1,12 +1,5 @@
 package org.example;
 public class Reverse {
-    // public static void transformModel(CtModel model) {
-    // model.getElements(new TypeFilter<>(CtIf.class)).forEach(ifStatement -> {
-    // CtExpression<Boolean> condition = ((CtIf) ifStatement).getCondition();
-    // CtExpression<Boolean> transformedCondition = reverseBinaryOperators(condition);
-    // ((CtIf) ifStatement).setCondition(transformedCondition);
-    // });
-    // }
     public static void reverseOperators(spoon.reflect.declaration.CtClass<?> ctClass) {
         // If the element is a class
         // Traverse through the elements of the CtClass
@@ -19,16 +12,6 @@ public class Reverse {
         }
     }
 
-    // print function
-    public static void printAST(spoon.reflect.CtModel model, spoon.Launcher launcher) {
-        spoon.reflect.visitor.DefaultJavaPrettyPrinter printer = new spoon.reflect.visitor.DefaultJavaPrettyPrinter(launcher.getEnvironment());
-        model.getAllTypes().forEach(type -> {
-            printer.scan(type);
-            java.lang.System.out.println(printer.toString());
-        });
-    }
-
-    // Method to reverse binary operators recursively
     // Method to reverse binary operators recursively
     public static void reverseBinaryOperators(spoon.reflect.code.CtExpression<?> expression) {
         if (expression instanceof spoon.reflect.code.CtBinaryOperator) {
@@ -80,35 +63,10 @@ public class Reverse {
                 binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.LT);
                 break;
             case GE :
-                binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.LT);
+                binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.LE);
                 break;
             default :
                 break;
         }
-    }
-
-    public static spoon.reflect.code.CtExpression<java.lang.Boolean> reverseOperators(spoon.reflect.code.CtExpression<java.lang.Boolean> condition) {
-        if (condition instanceof spoon.reflect.code.CtBinaryOperator) {
-            spoon.reflect.code.CtBinaryOperator<java.lang.Boolean> binaryOperator = ((spoon.reflect.code.CtBinaryOperator<java.lang.Boolean>) (condition));
-            switch (binaryOperator.getKind()) {
-                case EQ :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.NE);
-                case NE :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.EQ);
-                case AND :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.OR);
-                case OR :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.AND);
-                case GT :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.LT);
-                case GE :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.LE);
-                case LT :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.GT);
-                case LE :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.GE);
-            }
-        }
-        return condition;
     }
 }
