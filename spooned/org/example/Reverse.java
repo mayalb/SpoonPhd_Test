@@ -30,7 +30,7 @@ public class Reverse {
 
     // Method to reverse binary operators recursively
     // Method to reverse binary operators recursively
-    private static void reverseBinaryOperators(spoon.reflect.code.CtExpression<?> expression) {
+    public static void reverseBinaryOperators(spoon.reflect.code.CtExpression<?> expression) {
         if (expression instanceof spoon.reflect.code.CtBinaryOperator) {
             spoon.reflect.code.CtBinaryOperator<?> binaryOperator = ((spoon.reflect.code.CtBinaryOperator<?>) (expression));
             spoon.reflect.code.BinaryOperatorKind originalKind = binaryOperator.getKind();
@@ -61,7 +61,7 @@ public class Reverse {
     }
 
     // Method to reverse comparison operators
-    private static void reverseComparisonOperator(spoon.reflect.code.CtBinaryOperator<?> binaryOperator) {
+    public static void reverseComparisonOperator(spoon.reflect.code.CtBinaryOperator<?> binaryOperator) {
         spoon.reflect.code.BinaryOperatorKind originalKind = binaryOperator.getKind();
         switch (originalKind) {
             case EQ :

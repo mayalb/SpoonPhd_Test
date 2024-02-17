@@ -57,17 +57,9 @@ public class Reverse {
         }
     }
 
-    // print function
-    public static void printAST(CtModel model, Launcher launcher) {
-        DefaultJavaPrettyPrinter printer = new DefaultJavaPrettyPrinter(launcher.getEnvironment());
-        model.getAllTypes().forEach(type -> {
-            printer.scan(type);
-            System.out.println(printer.toString());
-        });
-    }
+
     // Method to reverse binary operators recursively
-    // Method to reverse binary operators recursively
-    public static void reverseBinaryOperators(CtExpression<?> expression) {
+    public static  void reverseBinaryOperators(CtExpression<?> expression) {
         if (expression instanceof CtBinaryOperator) {
             CtBinaryOperator<?> binaryOperator = (CtBinaryOperator<?>) expression;
             BinaryOperatorKind originalKind = binaryOperator.getKind();
@@ -79,6 +71,7 @@ public class Reverse {
                     binaryOperator.setKind(BinaryOperatorKind.AND);
                     break;
                 // Handle comparison operators
+
                 case EQ:
                 case NE:
                 case LT:
@@ -116,7 +109,7 @@ public class Reverse {
                 binaryOperator.setKind(BinaryOperatorKind.LT);
                 break;
             case GE:
-                binaryOperator.setKind(BinaryOperatorKind.LT);
+                binaryOperator.setKind(BinaryOperatorKind.LE);
                 break;
             default:
                 break;

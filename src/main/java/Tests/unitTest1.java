@@ -24,8 +24,8 @@ import spoon.reflect.visitor.filter.NamedElementFilter;
 
 public class unitTest1 {
     @Test
-    public void testCodeEquality() {
-    String originalCode = "class A {\n" +
+    public void ReverseCodeTest() {
+    String inputCode = "class XYDataItem {\n" +
 
                 "public XYDataItem addOrUpdate(Number x, Number y) {\n" +
                 "if (x == null) {\n" +
@@ -59,7 +59,7 @@ public class unitTest1 {
                 "}\n" +
                 "}";
 
-    String expectedCode = "class A{\n" +
+    String expectedCode = "class XYDataItem{\n" +
                 "public XYDataItem addOrUpdate(Number x, Number y) {\n" +
                 "if (x != null) {\n" +
                 "throw new IllegalArgumentException(\"Null 'x' argument.\");\n" +
@@ -91,12 +91,11 @@ public class unitTest1 {
                 "return overwritten;\n" +
                 "}\n" +
                 "}";
-
-    CtClass<?> expected = Launcher.parseClass(expectedCode) ;
-    CtClass original = Launcher.parseClass(originalCode) ;
-    //CtClass inputCode = (CtClass)Classes.get(0);
+    //parce the string into classes
+    CtClass expected = Launcher.parseClass(expectedCode) ;
+    CtClass original = Launcher.parseClass(inputCode) ;
+    // apply reverse function
     Reverse.reverseOperators(original);
-    //Reverse.reverseOperators(expectedCode);
-    Assert.assertEquals(expected.toString(), expected.toString());
+    Assert.assertEquals(expected.toString(), original.toString());
     }
 }
