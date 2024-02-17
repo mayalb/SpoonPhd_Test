@@ -67,7 +67,7 @@ public class Reverse {
     }
     // Method to reverse binary operators recursively
     // Method to reverse binary operators recursively
-    private static void reverseBinaryOperators(CtExpression<?> expression) {
+    public static void reverseBinaryOperators(CtExpression<?> expression) {
         if (expression instanceof CtBinaryOperator) {
             CtBinaryOperator<?> binaryOperator = (CtBinaryOperator<?>) expression;
             BinaryOperatorKind originalKind = binaryOperator.getKind();
@@ -97,7 +97,7 @@ public class Reverse {
         }
     }
     // Method to reverse comparison operators
-    private static void reverseComparisonOperator(CtBinaryOperator<?> binaryOperator) {
+    public static void reverseComparisonOperator(CtBinaryOperator<?> binaryOperator) {
         BinaryOperatorKind originalKind = binaryOperator.getKind();
         switch (originalKind) {
             case EQ:
