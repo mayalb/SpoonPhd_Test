@@ -50,20 +50,16 @@ public class XYDataItem {
     }
 
     private void fireSeriesChanged() {
-        // Implementation of fireSeriesChanged method
     }
 
     private int getItemCount() {
-        // Implementation of getItemCount method
         return data.size();
     }
 
     private void setY(java.lang.Number y) {
-        // Implementation of setY method
     }
 
     protected org.example.XYDataItem clone() throws java.lang.CloneNotSupportedException {
-        // Implementation of clone method
         return ((org.example.XYDataItem) (super.clone()));
     }
 

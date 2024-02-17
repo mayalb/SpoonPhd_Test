@@ -71,13 +71,13 @@ public class Reverse {
                 binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.EQ);
                 break;
             case LT :
-                binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.GE);
-                break;
-            case LE :
                 binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.GT);
                 break;
+            case LE :
+                binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.GE);
+                break;
             case GT :
-                binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.LE);
+                binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.LT);
                 break;
             case GE :
                 binaryOperator.setKind(spoon.reflect.code.BinaryOperatorKind.LT);
@@ -100,13 +100,13 @@ public class Reverse {
                 case OR :
                     return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.AND);
                 case GT :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.LE);
-                case GE :
                     return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.LT);
+                case GE :
+                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.LE);
                 case LT :
-                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.GE);
-                case LE :
                     return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.GT);
+                case LE :
+                    return binaryOperator.clone().setKind(spoon.reflect.code.BinaryOperatorKind.GE);
             }
         }
         return condition;

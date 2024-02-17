@@ -107,13 +107,13 @@ public class Reverse {
                 binaryOperator.setKind(BinaryOperatorKind.EQ);
                 break;
             case LT:
-                binaryOperator.setKind(BinaryOperatorKind.GE);
-                break;
-            case LE:
                 binaryOperator.setKind(BinaryOperatorKind.GT);
                 break;
+            case LE:
+                binaryOperator.setKind(BinaryOperatorKind.GE);
+                break;
             case GT:
-                binaryOperator.setKind(BinaryOperatorKind.LE);
+                binaryOperator.setKind(BinaryOperatorKind.LT);
                 break;
             case GE:
                 binaryOperator.setKind(BinaryOperatorKind.LT);
@@ -136,13 +136,13 @@ public class Reverse {
                 case OR:
                     return binaryOperator.clone().setKind(BinaryOperatorKind.AND);
                 case GT:
-                    return binaryOperator.clone().setKind(BinaryOperatorKind.LE);
-                case GE:
                     return binaryOperator.clone().setKind(BinaryOperatorKind.LT);
+                case GE:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.LE);
                 case LT:
-                    return binaryOperator.clone().setKind(BinaryOperatorKind.GE);
-                case LE:
                     return binaryOperator.clone().setKind(BinaryOperatorKind.GT);
+                case LE:
+                    return binaryOperator.clone().setKind(BinaryOperatorKind.GE);
             }
         }
         return condition;
