@@ -16,6 +16,6 @@ public class Main {
         org.example.Reverse reverse = new org.example.Reverse();
         reverse.reverseOperators(inputCode);
         java.lang.System.out.println("   ----- transformed Code ---- \n\n");
-        java.lang.System.out.println(inputCode.toString());
+        java.lang.System.out.println(inputCode);
     }
 }

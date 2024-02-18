@@ -22,7 +22,7 @@ public class Main {
         Reverse reverse= new Reverse();
         reverse.reverseOperators(inputCode);
        System.out.println("   ----- transformed Code ---- \n\n" );
-       System.out.println(inputCode.toString());
+       System.out.println(inputCode);
 
 
 
