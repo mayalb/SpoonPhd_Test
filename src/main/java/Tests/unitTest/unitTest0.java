@@ -6,7 +6,7 @@ import org.junit.Test;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
 
-public class unitTest2 {
+public class unitTest0 {
     @Test
     public void SimpleIfStatementTest() {
         String inputCode = "class Input {\n" +

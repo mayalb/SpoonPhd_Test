@@ -4,7 +4,6 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import org.example.OperationClass;
 import org.example.*;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
@@ -13,8 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 
 
-public class Steps {
-    private OperationClass OperationInstance;
+public class scenario1Steps {
     private Reverse reverse;
     private String transformedCode;
     private String originalCode;
@@ -29,10 +27,7 @@ public class Steps {
                 "System.out.println(\"Compound if statement\");\n" +
                 "}\n" +
                 "}";
-        OperationInstance = new OperationClass();
     }
-
-
 
 
     @When("the reverse operators function is applied")
@@ -58,10 +53,7 @@ public class Steps {
         "        }\n" +
         "    }\n" +
         "}";
-        System.out.println(original.toString());
         assertEquals(expectedCode.toString(), original.toString());
-
-
     }
 
 }
