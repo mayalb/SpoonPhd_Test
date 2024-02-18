@@ -7,6 +7,7 @@ import spoon.reflect.code.CtIf;
 import spoon.reflect.code.BinaryOperatorKind;
 
 public class Reverse {
+    public Reverse(){}
 
     public static void reverseOperators(CtClass<?> ctClass) {
         // If the element is a class

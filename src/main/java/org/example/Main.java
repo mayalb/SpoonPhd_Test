@@ -19,7 +19,8 @@ public class Main {
         List<CtClass> Classes = model.filterChildren(new NamedElementFilter(CtClass.class, "XYDataItem")).list();
         CtClass inputCode = (CtClass)Classes.get(0);
         System.out.println("   ----- Input Code ---- \n\n" + inputCode);
-        Reverse.reverseOperators(inputCode);
+        Reverse reverse= new Reverse();
+        reverse.reverseOperators(inputCode);
        System.out.println("   ----- transformed Code ---- \n\n" );
        System.out.println(inputCode.toString());
 

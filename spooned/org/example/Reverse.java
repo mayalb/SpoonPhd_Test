@@ -1,5 +1,8 @@
 package org.example;
 public class Reverse {
+    public Reverse() {
+    }
+
     public static void reverseOperators(spoon.reflect.declaration.CtClass<?> ctClass) {
         // If the element is a class
         // Traverse through the elements of the CtClass

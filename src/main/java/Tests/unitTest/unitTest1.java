@@ -1,26 +1,12 @@
-package Tests;
+package Tests.unitTest;
 
-import org.apache.commons.lang3.builder.ToStringExclude;
-import org.example.* ;
-import org.example.Reverse;
 import org.junit.Test;
 import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
 
+import org.example.Reverse;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtClass;
-import static org.junit.Assert.assertEquals;
-import spoon.Launcher;
-import spoon.reflect.CtModel;
-import spoon.Launcher;
-import spoon.reflect.CtModel;
-import java.util.List;
-import spoon.reflect.code.BinaryOperatorKind;
-import spoon.reflect.code.CtBinaryOperator;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtIf;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.visitor.filter.NamedElementFilter;
+
 
 public class unitTest1 {
     @Test

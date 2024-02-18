@@ -13,7 +13,8 @@ public class Main {
         java.util.List<spoon.reflect.declaration.CtClass> Classes = model.filterChildren(new spoon.reflect.visitor.filter.NamedElementFilter(spoon.reflect.declaration.CtClass.class, "XYDataItem")).list();
         spoon.reflect.declaration.CtClass inputCode = ((spoon.reflect.declaration.CtClass) (Classes.get(0)));
         java.lang.System.out.println("   ----- Input Code ---- \n\n" + inputCode);
-        org.example.Reverse.reverseOperators(inputCode);
+        org.example.Reverse reverse = new org.example.Reverse();
+        reverse.reverseOperators(inputCode);
         java.lang.System.out.println("   ----- transformed Code ---- \n\n");
         java.lang.System.out.println(inputCode.toString());
     }

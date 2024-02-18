@@ -1,4 +1,4 @@
-package Tests;
+package Tests.unitTest;
 
 import org.example.Reverse;
 import org.junit.Assert;
@@ -97,6 +97,6 @@ public class unitTest2 {
         CtClass original = Launcher.parseClass(inputCode) ;
         // apply reverse function
         Reverse.reverseOperators(original);
-        Assert.assertEquals(expected.toString(), original.toString());
+        Assert.assertEquals (expected.toString(), original.toString());
     }
 }
